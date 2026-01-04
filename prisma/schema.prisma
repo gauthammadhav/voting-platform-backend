@@ -1,0 +1,42 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(uuid())
+  name         String
+  email        String   @unique
+  authProvider String
+  linkedinUrl  String?
+  hasVoted     Boolean  @default(false)
+
+  votes        Vote[]
+
+  createdAt    DateTime @default(now())
+}
+
+model Candidate {
+  id           String   @id @default(uuid())
+  name         String
+  description  String
+  linkedinUrl  String
+
+  votes        Vote[]
+}
+
+model Vote {
+  id           String   @id @default(uuid())
+
+  userId       String   @unique
+  candidateId  String
+
+  user         User      @relation(fields: [userId], references: [id])
+  candidate    Candidate @relation(fields: [candidateId], references: [id])
+
+  createdAt    DateTime @default(now())
+}

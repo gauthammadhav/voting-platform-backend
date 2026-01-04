@@ -2,6 +2,9 @@
   "name": "voting-platform-backend",
   "version": "1.0.0",
   "main": "index.js",
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -18,7 +21,9 @@
   "homepage": "https://github.com/gauthammadhav/voting-platform-backend#readme",
   "description": "",
   "dependencies": {
+    "@prisma/client": "^6.19.1",
     "dotenv": "^17.2.3",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "prisma": "^6.19.1"
   }
 }
