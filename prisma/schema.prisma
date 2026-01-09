@@ -4,20 +4,26 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id           String   @id @default(uuid())
-  name         String
-  email        String   @unique
-  authProvider String
-  linkedinUrl  String?
-  hasVoted     Boolean  @default(false)
+  id             String   @id @default(uuid())
 
-  votes        Vote[]
+  provider       String
+  providerUserId String
 
-  createdAt    DateTime @default(now())
+  name           String
+  email          String?
+  linkedinUrl    String?
+
+  hasVoted       Boolean  @default(false)
+
+  votes          Vote[]
+
+  createdAt      DateTime @default(now())
+
+  @@unique([provider, providerUserId])
 }
 
 model Candidate {
