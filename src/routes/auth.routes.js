@@ -43,9 +43,9 @@ router.get(
     });
 
     // Send token to client
-    res.json({
+    res.status(200).json({
       message: "Google login successful",
-      token,
+      data: { token },
     });
   }
 );
@@ -61,9 +61,9 @@ router.get(
       provider: user.provider,
     });
 
-    res.json({
+    res.status(200).json({
       message: "LinkedIn login successful",
-      token,
+      data: { token },
     });
   }
 );

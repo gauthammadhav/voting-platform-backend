@@ -5,18 +5,21 @@ async function getVoters(req, res) {
     const { candidateId } = req.params;
 
     if (!candidateId) {
-      return res.status(400).json({ error: "Candidate ID is required" });
+      return res.status(400).json({ message: "Candidate ID is required" });
     }
 
     const voters = await getVotersByCandidate(candidateId);
 
-    res.json({
-      candidateId,
-      voters,
+    res.status(200).json({
+      message: "Voters fetched successfully",
+      data: {
+        candidateId,
+        voters,
+      },
     });
   } catch (error) {
     console.error("Get voters error:", error.message);
-    res.status(500).json({ error: "Failed to fetch voters" });
+    res.status(500).json({ message: "Failed to fetch voters" });
   }
 }
 

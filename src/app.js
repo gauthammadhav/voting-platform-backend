@@ -11,7 +11,7 @@ app.use(passport.initialize());
 
 // Health check route
 app.get("/health", (req, res) => {
-  res.status(200).json({ status: "OK" });
+  res.status(200).json({ message: "Server is healthy" });
 });
 
 const candidateRoutes = require("./routes/candidates.routes");
@@ -64,5 +64,20 @@ try {
   console.error(error.stack);
   throw error;
 }
+
+// 404 handler for unmapped routes
+app.use((req, res) => {
+  res.status(404).json({
+    message: "Route not found",
+  });
+});
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error("Unhandled error:", err);
+  res.status(500).json({
+    message: "Internal server error",
+  });
+});
 
 module.exports = app;
