@@ -15,11 +15,7 @@ router.get(
   })
 );
 
-router.get(
-  "/linkedin",
-  passport.authenticate("linkedin")
-);
-
+router.get("/linkedin", passport.authenticate("linkedin"));
 
 console.log("✓ /google route defined");
 
@@ -67,6 +63,5 @@ router.get(
     });
   }
 );
-
 
 module.exports = router;

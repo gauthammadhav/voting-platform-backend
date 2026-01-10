@@ -27,7 +27,10 @@ app.use("/api/vote", voteRoutes);
 const votersRouters = require("./routes/voters.routes");
 console.log("votersRouters type:", typeof votersRouters);
 console.log("votersRouters keys:", Object.keys(votersRouters));
-console.log("votersRouters.stack length:", votersRouters.stack ? votersRouters.stack.length : 'no stack');
+console.log(
+  "votersRouters.stack length:",
+  votersRouters.stack ? votersRouters.stack.length : "no stack"
+);
 if (votersRouters.stack) {
   votersRouters.stack.forEach((layer, i) => {
     if (layer.route) {
